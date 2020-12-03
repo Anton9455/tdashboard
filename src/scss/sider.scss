@@ -1,0 +1,12 @@
+.side-buttons{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    height: inherit;
+    .side-buttons__row{
+        .col{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
