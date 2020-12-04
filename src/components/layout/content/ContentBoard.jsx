@@ -1,14 +1,12 @@
 import React from "react";
 import { Row } from "antd";
 import { useQuery } from "@apollo/react-hooks";
-import { loader } from "graphql.macro";
 import ContentColumn from "./ContentColumn";
-import "../scss/content.scss";
-
-const GetAllTabs = loader("../graphql/GetAllTabs.graphql");
+import "../../../scss/content.scss";
+import { GET_ALL_TAB } from "../../../graphql/queries";
 
 export default () => {
-  const { data, loading } = useQuery(GetAllTabs);
+  const { data, loading } = useQuery(GET_ALL_TAB);
   return (
     <div className="content-board">
       <Row className="content-board__row row">
@@ -18,8 +16,10 @@ export default () => {
           data.getAllTabs.map((tab, index) => {
             return (
               <ContentColumn
+                id={tab.id}
                 title={tab.title}
                 spanSize={Math.floor(18 / data.getAllTabs.length)}
+                cards={tab.tasks}
                 key={index}
               />
             );

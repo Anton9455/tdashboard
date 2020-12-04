@@ -22,7 +22,14 @@
       padding: 1em;
       overflow: auto;
       &__title {
-        text-align: center;
+        p {
+          text-align: center;
+        }
+        input {
+          margin-top: 1em;
+          height: 3vh;
+          border-color: #33ccab;
+        }
       }
     }
   }

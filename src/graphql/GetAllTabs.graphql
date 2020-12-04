@@ -1,6 +1,13 @@
 query GetAllTabs {
   getAllTabs {
     id
+    order
     title
+    tasks {
+      id
+      order
+      title
+      description
+    }
   }
 }

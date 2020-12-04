@@ -1,0 +1,3 @@
+mutation AddTabTitle($id: ID!, $title: String!) {
+  addTabTitle(id: $id, title: $title)
+}

@@ -8,21 +8,23 @@ const schemaString = readFileSync("./schema.graphql", { encoding: "utf8" });
 
 const schema = buildSchema(schemaString);
 
+const genId = () => Math.floor(Math.random() * 20);
+
 const allTabs = [
   {
-    id: "1",
+    id: genId(),
     order: "1",
     title: "Нужно сделать",
     description: "Блок задач, которые планируются в работу",
     tasks: [
       {
-        id: "1",
+        id: genId(),
         order: "1",
         title: "Реализация приложения",
         description: "Подготовка архитектуры",
       },
       {
-        id: "1",
+        id: genId(),
         order: "2",
         title: "Дизайн",
         description: "Проработка макетов",
@@ -30,13 +32,13 @@ const allTabs = [
     ],
   },
   {
-    id: "2",
+    id: genId(),
     order: "2",
     title: "В процессе",
     description: "Блок задач, находящихся в работе",
     tasks: [
       {
-        id: "1",
+        id: genId(),
         order: "1",
         title: "Документация",
         description: "Подготовка документации",
@@ -44,7 +46,7 @@ const allTabs = [
     ],
   },
   {
-    id: "3",
+    id: genId(),
     order: "3",
     title: "Готово",
     description: "Блок выполненных задач",
@@ -58,9 +60,21 @@ const root = {
   },
   addTab: (params) => {
     allTabs.push({
-      ...params.tab,
+      id: params.id,
+      order: "",
+      title: "",
+      description: "",
+      tasks: [],
     });
 
+    return true;
+  },
+  addTabTitle: (params) => {
+    allTabs.forEach((tab) => {
+      if (tab.id === params.id) {
+        tab.title = params.title;
+      }
+    });
     return true;
   },
 };
