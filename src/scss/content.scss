@@ -1,28 +1,29 @@
-.content-board{
-    height: 100%;
-    overflow: auto;
-    padding: 0.5em;
-    &__row{
-        display: flex;
-        flex-flow: row;
-        justify-content: space-between;
-        height: inherit;
-        .col{
-            display: flex;
-            flex-flow: column;
-            justify-content: flex-start;
-            background:#ebfffb;
-            border: 1px solid #ebfffb;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            border-radius: 30px;
-            margin: 1em 3em 1em 3em;
-            min-height: 15em;
-            min-width: 15em;
-            padding: 1em;
-            overflow: auto;
-            &__title{
-                text-align: center;
-            }
-        }
+.content-board {
+  height: 100%;
+  overflow: auto;
+  padding: 0.5em;
+  &__row {
+    display: flex;
+    flex-flow: row;
+    justify-content: start;
+    height: inherit;
+    .col {
+      display: flex;
+      flex-flow: column;
+      justify-content: start;
+      background: #ebfffb;
+      border: 1px solid #ebfffb;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      border-radius: 30px;
+      margin: 1em 3em 1em 3em;
+      max-width: 20em;
+      min-height: 15em;
+      min-width: 15em;
+      padding: 1em;
+      overflow: auto;
+      &__title {
+        text-align: center;
+      }
     }
+  }
 }

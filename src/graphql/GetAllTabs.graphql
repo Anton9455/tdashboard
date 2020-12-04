@@ -1,0 +1,6 @@
+query GetAllTabs {
+  getAllTabs {
+    id
+    title
+  }
+}

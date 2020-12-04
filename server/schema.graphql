@@ -1,0 +1,26 @@
+type Task {
+  id: ID!
+  order: String!
+  title: String!
+  description: String
+}
+
+type Tab {
+  id: ID!
+  order: String!
+  title: String!
+  description: String
+  tasks: [Task]
+}
+
+input InputTab {
+  id: ID!
+}
+
+type Query {
+  getAllTabs: [Tab]!
+}
+
+type Mutation {
+  addTab(tab: InputTab!): Boolean!
+}

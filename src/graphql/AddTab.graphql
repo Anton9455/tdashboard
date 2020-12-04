@@ -1,0 +1,17 @@
+type Tab {
+  id: ID!
+  order: String!
+  title: String!
+  description: String
+  tasks: [Task]
+}
+
+mutation AddTab($tab: Tab) {
+  addTab(tab: $tab) {
+    id
+    order
+    title
+    description
+    tasks
+  }
+}
