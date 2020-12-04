@@ -1,7 +1,7 @@
 import React from "react";
 import { Row } from "antd";
 import { useQuery } from "@apollo/react-hooks";
-import ContentColumn from "./ContentColumn";
+import ContentTab from "./ContentTab";
 import "../../../scss/content.scss";
 import { GET_ALL_TAB } from "../../../graphql/queries";
 
@@ -15,7 +15,7 @@ export default () => {
           data &&
           data.getAllTabs.map((tab, index) => {
             return (
-              <ContentColumn
+              <ContentTab
                 id={tab.id}
                 title={tab.title}
                 spanSize={Math.floor(18 / data.getAllTabs.length)}

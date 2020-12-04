@@ -24,4 +24,5 @@ type Query {
 type Mutation {
   addTab(id: ID!): Boolean!
   addTabTitle(id: ID!, title: String!): Boolean!
+  addTask(id: ID!): Boolean!
 }

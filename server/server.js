@@ -12,7 +12,7 @@ const genId = () => Math.floor(Math.random() * 20);
 
 const allTabs = [
   {
-    id: genId(),
+    id: "1",
     order: "1",
     title: "Нужно сделать",
     description: "Блок задач, которые планируются в работу",
@@ -73,6 +73,19 @@ const root = {
     allTabs.forEach((tab) => {
       if (tab.id === params.id) {
         tab.title = params.title;
+      }
+    });
+    return true;
+  },
+  addTask: (params) => {
+    allTabs.forEach((tab) => {
+      if (tab.id === params.id) {
+        tab.tasks.push({
+          id: genId(),
+          order: tab.tasks.length,
+          title: "",
+          description: "",
+        });
       }
     });
     return true;
