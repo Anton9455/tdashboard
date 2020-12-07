@@ -1,0 +1,3 @@
+mutation RemoveTab($id: ID!) {
+  removeTab(id: $id)
+}

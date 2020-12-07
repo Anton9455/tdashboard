@@ -1,10 +1,18 @@
 import React from "react";
 import { Input } from "antd";
 
-export default ({ description }) => {
+export default ({ isEdit, description, inputHandler }) => {
   return (
     <div>
-      {description ? <p>{description}</p> : <Input.TextArea rows={2} />}
+      {isEdit ? (
+        <Input.TextArea
+          value={description}
+          rows={2}
+          onChange={(e) => inputHandler(e)}
+        />
+      ) : (
+        <p>{description}</p>
+      )}
     </div>
   );
 };

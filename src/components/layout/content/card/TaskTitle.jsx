@@ -1,10 +1,18 @@
 import React from "react";
 import { Input } from "antd";
 
-export default ({ title }) => {
+export default ({ isEdit, title, inputHandler }) => {
   return (
     <div>
-      {title ? <p>{title}</p> : <Input placeholder="Наименование задачи" />}
+      {isEdit ? (
+        <Input
+          placeholder="Наименование задачи"
+          value={title}
+          onChange={(e) => inputHandler(e)}
+        />
+      ) : (
+        <p>{title}</p>
+      )}
     </div>
   );
 };

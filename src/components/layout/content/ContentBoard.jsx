@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row } from "antd";
 import { useQuery } from "@apollo/react-hooks";
 import ContentTab from "./ContentTab";
@@ -6,6 +6,7 @@ import "../../../scss/content.scss";
 import { GET_ALL_TAB } from "../../../graphql/queries";
 
 export default () => {
+  const [selectedId, setSelected] = useState();
   const { data, loading } = useQuery(GET_ALL_TAB);
   return (
     <div className="content-board">
@@ -21,6 +22,8 @@ export default () => {
                 spanSize={Math.floor(18 / data.getAllTabs.length)}
                 cards={tab.tasks}
                 key={index}
+                selected={selectedId === tab.id}
+                selectHandler={(id) => setSelected(id)}
               />
             );
           })}

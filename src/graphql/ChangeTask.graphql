@@ -1,0 +1,3 @@
+mutation ChangeTask($id: ID!, $title: String!, $description: String) {
+  changeTask(id: $id, title: $title, description: $description)
+}

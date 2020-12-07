@@ -8,7 +8,8 @@ const schemaString = readFileSync("./schema.graphql", { encoding: "utf8" });
 
 const schema = buildSchema(schemaString);
 
-const genId = () => Math.floor(Math.random() * 20);
+const genId = () =>
+  Math.floor(Math.random() * 20) + Math.floor(new Date().getTime()).toString();
 
 const allTabs = [
   {
@@ -88,6 +89,35 @@ const root = {
         });
       }
     });
+    return true;
+  },
+  changeTask: ({ id, title, description }) => {
+    allTabs.forEach((tab) => {
+      tab.tasks.forEach((task) => {
+        if (task.id === id) {
+          task.title = title;
+          task.description = description;
+          console.log("task", task);
+        }
+      });
+    });
+    return true;
+  },
+  removeTask: (params) => {
+    allTabs.forEach((tab) => {
+      tab.tasks = tab.tasks.filter((task) => {
+        if (task.id !== params.id) {
+          return task;
+        }
+      });
+    });
+    return true;
+  },
+  removeTab: ({ id }) => {
+    allTabs.splice(
+      allTabs.findIndex((tab) => tab.id === id),
+      1
+    );
     return true;
   },
 };
