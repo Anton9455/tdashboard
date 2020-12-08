@@ -5,8 +5,7 @@ import ContentTab from "./ContentTab";
 import "../../../scss/content.scss";
 import { GET_ALL_TAB } from "../../../graphql/queries";
 
-export default () => {
-  const [selectedId, setSelected] = useState();
+export default ({ selectedId, setSelected }) => {
   const { data, loading } = useQuery(GET_ALL_TAB);
   return (
     <div className="content-board">

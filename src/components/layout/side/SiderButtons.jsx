@@ -6,7 +6,7 @@ import Btn from "./SiderButton";
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_TAB, ADD_TASK, GET_ALL_TAB } from "../../../graphql/queries";
 
-export default () => {
+export default ({selectedId}) => {
   const [addTab] = useMutation(ADD_TAB, {
     refetchQueries: [{ query: GET_ALL_TAB }],
   });
@@ -20,7 +20,7 @@ export default () => {
           <Btn
             icon={<PlusOutlined />}
             onClick={() => {
-              addTask({ variables: { id: 1 } });
+              addTask({ variables: { id: selectedId } });
             }}
           />
         </Col>

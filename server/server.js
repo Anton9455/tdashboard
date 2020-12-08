@@ -97,7 +97,6 @@ const root = {
         if (task.id === id) {
           task.title = title;
           task.description = description;
-          console.log("task", task);
         }
       });
     });

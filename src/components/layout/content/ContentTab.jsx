@@ -14,7 +14,9 @@ import ContentTabRemove from "./ContentTabRemove";
 export default ({ id, spanSize, title, cards, selected, selectHandler }) => {
   let move = false;
 
-  const [showRemoveBtn, setShowRemoveBtn] = useState(false);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const [showRemoveBtn, setShowRemoveBtn] = useState(isMobile ? true : false);
 
   const tabRef = useRef();
 
@@ -45,7 +47,7 @@ export default ({ id, spanSize, title, cards, selected, selectHandler }) => {
   };
 
   const onMouseMoveHandler = (e) => {
-    if (move) {
+    if (move && e.currentTarget == e.target) {
       let offset = Math.floor(
         ((e.clientY - 85) * 100) / tabRef.current.offsetHeight
       );
@@ -64,18 +66,22 @@ export default ({ id, spanSize, title, cards, selected, selectHandler }) => {
     setShowRemoveBtn(false);
   };
 
+  const onMouseDownHandler = (e) => {
+    if (e.currentTarget == e.target) {
+      move = true;
+    }
+    selectHandler(id);
+  };
+
   return (
     <Col
       span={spanSize}
       className={`row__col col ${selected ? "selected" : ""}`}
       ref={tabRef}
-      onMouseDown={() => (move = true)}
+      onMouseDown={onMouseDownHandler}
       onMouseMove={onMouseMoveHandler}
       onMouseUp={() => (move = false)}
       onMouseLeave={onMouseLeaveHandler}
-      onClick={(e) => {
-        selectHandler(id);
-      }}
     >
       <ContentTabTitle id={id} title={title} />
       {cards &&
