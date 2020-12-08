@@ -6,7 +6,7 @@ import TaskButtons from "./TaskButtons";
 import TaskTitle from "./TaskTitle";
 import TaskDescription from "./TaskDescription";
 
-export default ({ id, title, description, changeContent, removeTask }) => {
+export default ({ id, title, description, changeContent, removeTask, dnd }) => {
   const [cardContent, setContent] = useState({
     id: id,
     title: title,
@@ -49,6 +49,8 @@ export default ({ id, title, description, changeContent, removeTask }) => {
       }
       extra={<TaskButtons editContent={editContent} removeCard={removeCard} />}
       className="card"
+      draggable={dnd.draggable}
+      onDragStart={dnd.onDragStart}
     >
       <TaskDescription
         isEdit={cardContent.isEdit}

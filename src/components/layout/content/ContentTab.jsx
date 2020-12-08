@@ -4,6 +4,7 @@ import Task from "./card/Task";
 import ContentTabTitle from "./ContentTabTitle";
 import {
   CHANGE_TASK,
+  CHANGE_TASK_POSITION,
   GET_ALL_TAB,
   REMOVE_TAB,
   REMOVE_TASK,
@@ -11,7 +12,16 @@ import {
 import { useMutation } from "@apollo/react-hooks";
 import ContentTabRemove from "./ContentTabRemove";
 
-export default ({ id, spanSize, title, cards, selected, selectHandler }) => {
+export default ({
+  id,
+  spanSize,
+  title,
+  cards,
+  isSelectTab,
+  selectHandler,
+  currentTask,
+  currentTaskHandler,
+}) => {
   let move = false;
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -29,6 +39,10 @@ export default ({ id, spanSize, title, cards, selected, selectHandler }) => {
   });
 
   const [removeTabMutation] = useMutation(REMOVE_TAB, {
+    refetchQueries: [{ query: GET_ALL_TAB }],
+  });
+
+  const [changeTaskPositionMutation] = useMutation(CHANGE_TASK_POSITION, {
     refetchQueries: [{ query: GET_ALL_TAB }],
   });
 
@@ -73,15 +87,42 @@ export default ({ id, spanSize, title, cards, selected, selectHandler }) => {
     selectHandler(id);
   };
 
+  const dragLeaveHandler = (e) => {
+    e.currentTarget.style.border = "none";
+  };
+
+  const DnD = function (card) {
+    this.card = card;
+    this._dnd = {
+      draggable: true,
+      onDragStart: () => {
+        currentTaskHandler(card);
+      },
+    };
+    return this._dnd;
+  };
+
   return (
     <Col
       span={spanSize}
-      className={`row__col col ${selected ? "selected" : ""}`}
+      className={`row__col col ${isSelectTab ? "selected" : ""}`}
       ref={tabRef}
       onMouseDown={onMouseDownHandler}
       onMouseMove={onMouseMoveHandler}
       onMouseUp={() => (move = false)}
       onMouseLeave={onMouseLeaveHandler}
+      onDragOver={(e) => {
+        e.currentTarget.style.border = "1px solid red";
+        e.stopPropagation();
+        e.preventDefault();
+      }}
+      onDragEnd={dragLeaveHandler}
+      onDragLeave={dragLeaveHandler}
+      onDrop={() => {
+        changeTaskPositionMutation({
+          variables: { idTask: currentTask.id, idTab: id },
+        });
+      }}
     >
       <ContentTabTitle id={id} title={title} />
       {cards &&
@@ -94,6 +135,7 @@ export default ({ id, spanSize, title, cards, selected, selectHandler }) => {
               key={index}
               changeContent={changeContent}
               removeTask={removeTask}
+              dnd={new DnD(card)}
             />
           );
         })}

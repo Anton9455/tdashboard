@@ -28,4 +28,5 @@ type Mutation {
   changeTask(id: ID!, title: String!, description: String): Boolean!
   removeTask(id: ID!): Boolean!
   removeTab(id: ID!): Boolean!
+  changeTaskPosition(idTask: ID!, idTab: ID!): Boolean!
 }

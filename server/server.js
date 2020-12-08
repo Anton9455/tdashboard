@@ -119,6 +119,20 @@ const root = {
     );
     return true;
   },
+  changeTaskPosition: ({ idTask, idTab }) => {
+    let taskEdit = {};
+    allTabs.forEach((tab) => {
+      let index = tab.tasks.findIndex((task) => task.id === idTask);
+      if (index >= 0) {
+        taskEdit.task = { ...tab.tasks[index] };
+        tab.tasks.splice(index, 1);
+        return;
+      }
+    });
+    let indexTab = allTabs.findIndex((tab) => tab.id === idTab);
+    allTabs[indexTab].tasks.push(taskEdit.task);
+    return true;
+  },
 };
 
 const app = express();

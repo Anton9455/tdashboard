@@ -1,0 +1,3 @@
+mutation ChangeTaskPosition($idTask: ID!, $idTab: ID!) {
+  changeTaskPosition(idTask: $idTask, idTab: $idTab)
+}

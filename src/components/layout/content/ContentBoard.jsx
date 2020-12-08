@@ -7,6 +7,8 @@ import { GET_ALL_TAB } from "../../../graphql/queries";
 
 export default ({ selectedId, setSelected }) => {
   const { data, loading } = useQuery(GET_ALL_TAB);
+  const [currentTask, setCurrentTask] = useState();
+
   return (
     <div className="content-board">
       <Row className="content-board__row row">
@@ -21,8 +23,10 @@ export default ({ selectedId, setSelected }) => {
                 spanSize={Math.floor(18 / data.getAllTabs.length)}
                 cards={tab.tasks}
                 key={index}
-                selected={selectedId === tab.id}
+                isSelectTab={selectedId === tab.id}
                 selectHandler={(id) => setSelected(id)}
+                currentTask={currentTask}
+                currentTaskHandler={setCurrentTask}
               />
             );
           })}
