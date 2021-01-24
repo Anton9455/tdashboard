@@ -126,13 +126,13 @@ export default ({
     >
       <ContentTabTitle id={id} title={title} />
       {cards &&
-        cards.map((card, index) => {
+        cards.map((card) => {
           return (
             <Task
               id={card.id}
               title={card.title}
               description={card.description}
-              key={index}
+              key={card.id}
               changeContent={changeContent}
               removeTask={removeTask}
               dnd={new DnD(card)}

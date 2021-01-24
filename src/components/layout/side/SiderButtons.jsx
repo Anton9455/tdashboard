@@ -20,7 +20,9 @@ export default ({selectedId}) => {
           <Btn
             icon={<PlusOutlined />}
             onClick={() => {
-              addTask({ variables: { id: selectedId } });
+              if(selectedId){
+                addTask({ variables: { id: selectedId } });
+              }
             }}
           />
         </Col>

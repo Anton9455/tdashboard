@@ -8,9 +8,9 @@ import TaskDescription from "./TaskDescription";
 
 export default ({ id, title, description, changeContent, removeTask, dnd }) => {
   const [cardContent, setContent] = useState({
-    id: id,
-    title: title,
-    description: description,
+    id,
+    title,
+    description,
     isEdit: !(title || description),
   });
 
@@ -23,7 +23,7 @@ export default ({ id, title, description, changeContent, removeTask, dnd }) => {
   };
 
   const editContent = () => {
-    let isEdit = cardContent.isEdit;
+    let {isEdit} = cardContent;
 
     if (isEdit) {
       changeContent(cardContent);
